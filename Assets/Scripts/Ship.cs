@@ -18,13 +18,16 @@ public class Ship : MonoBehaviour
     public AudioClip deathKnell;
     public GameObject gameOverObj;
     public GameObject restart;
+    public GameObject[] cameraObj;
 
     private bool canShoot;
     private bool canMove;
+    private int currentCameraIndex;
 
 
     void Start()
     {
+        currentCameraIndex = 0;
         canShoot = true;
         canMove = true;
     }
@@ -52,6 +55,21 @@ public class Ship : MonoBehaviour
             GameObject obj = Instantiate(bullet, aim.transform.position, Quaternion.identity) as GameObject;
             canShoot = false;
             StartCoroutine(fireCooldown());
+        }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            if (currentCameraIndex < 2)
+            {
+                cameraObj[currentCameraIndex].SetActive(false);
+                currentCameraIndex++;
+                cameraObj[currentCameraIndex].SetActive(true);
+            } 
+            else
+            {
+                cameraObj[currentCameraIndex].SetActive(false);
+                currentCameraIndex = 0;
+                cameraObj[currentCameraIndex].SetActive(true);
+            }
         }
     }
     private IEnumerator fireCooldown()
