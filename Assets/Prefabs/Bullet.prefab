@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attkSpeed: 15
+  fireSound: {fileID: 8300000, guid: cb1ad098a8b2ea349abfefa3347d2031, type: 3}
 --- !u!54 &5589241711005832652
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -6,11 +6,13 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public float attkSpeed;
+    public AudioClip fireSound;
 
     void Start()
     {
         GetComponent<Rigidbody>().drag = 0;
         GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, attkSpeed * 50f));
+        AudioSource.PlayClipAtPoint(fireSound, gameObject.transform.position);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -19,6 +21,10 @@ public class BulletScript : MonoBehaviour
         {
             ObstacleScript obs = collider.GetComponent<ObstacleScript>();
             obs.Die();
+            Destroy(gameObject);
+        }
+        if (collider.CompareTag("Missile"))
+        {
             Destroy(gameObject);
         }
     }

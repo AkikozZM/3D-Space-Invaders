@@ -7,25 +7,37 @@ public class GroupAI : MonoBehaviour
 {
     public bool isLock;
     public leftOrRight currentDirection;
+    public GameObject missile;
+    public float attkCycle;
+    public GameObject invaderGreen;
+
     public enum leftOrRight
     {
         Left,
         Right
     }
     public float cooldown;
-    private bool canMove;
     public bool canMoveDown;
+    private bool canMove;
+    private bool canAttk;
+    public int enemyNums;
     void Start()
     {
+        StartCoroutine(Attk());
         canMove = true;
         cooldown = 1f;
         currentDirection = leftOrRight.Left;
+        enemyNums = 30;
     }
     private void Update()
     {
         if (canMove)
         {
             AutoMovement();
+        }
+        if (canAttk)
+        {
+            AttackPlayer();
         }
     }
 
@@ -57,5 +69,23 @@ public class GroupAI : MonoBehaviour
     {
         GameObject.Find("invaders").gameObject.transform.position += new Vector3(0, 0, -1);
         canMoveDown = false;
+    }
+    private void AttackPlayer()
+    {
+        // Get player location
+        GameObject ship = GameObject.Find("Ship").gameObject;
+        Vector3 missilePosition = new Vector3(ship.transform.position.x,
+                                              0, invaderGreen.transform.position.z);
+
+        // Instantiate missile
+        Instantiate(missile, missilePosition, Quaternion.Euler(90f, 0f, 0f));
+        StartCoroutine(Attk());
+    }
+
+    private IEnumerator Attk()
+    {
+        canAttk = false;
+        yield return new WaitForSeconds(attkCycle);
+        canAttk = true;
     }
 }

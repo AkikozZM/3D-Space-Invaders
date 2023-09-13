@@ -11,7 +11,7 @@ public class TitleScript : MonoBehaviour
         GUILayout.BeginArea(new Rect(10, Screen.height / 2 + 100, Screen.width - 10, 200));
         if (GUILayout.Button("New Game"))
         {
-            Application.LoadLevel("GameplayScene");
+            Application.LoadLevel("BasicSpaceInvader");
         }
         if (GUILayout.Button("High score"))
         {

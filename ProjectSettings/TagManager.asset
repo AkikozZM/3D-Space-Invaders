@@ -10,6 +10,8 @@ TagManager:
   - Obstacle
   - Invader
   - UFO
+  - Missile
+  - Ground
   layers:
   - Default
   - TransparentFX

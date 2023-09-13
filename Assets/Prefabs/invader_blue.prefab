@@ -97,7 +97,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3951805312235020434
 MonoBehaviour:
@@ -113,6 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reward: 20
   parent: {fileID: 0}
+  explosion: {fileID: 2379417151954710111, guid: 2394c0c4d7572f54bb51d4b71cac4dfa, type: 3}
+  deathKnell: {fileID: 8300000, guid: 745226f5b9c002c4f80c07be182e2948, type: 3}
 --- !u!54 &-8551048070029040310
 Rigidbody:
   m_ObjectHideFlags: 0
