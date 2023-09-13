@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4230986935752088539}
-  - component: {fileID: 1066013405797271541}
   m_Layer: 0
   m_Name: invader_green_grp
   m_TagString: Untagged
@@ -38,20 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1066013405797271541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904355790851410769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b4a06651035044e8d1ffa6cbd197ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isLock: 0
-  currentDirection: 0
 --- !u!1001 &2232079724686506400
 PrefabInstance:
   m_ObjectHideFlags: 0

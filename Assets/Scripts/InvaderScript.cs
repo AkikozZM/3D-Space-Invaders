@@ -29,11 +29,13 @@ public class InvaderScript : MonoBehaviour
             if (gp.currentDirection == GroupAI.leftOrRight.Left && !gp.isLock)
             {
                 gp.currentDirection = GroupAI.leftOrRight.Right;
+                gp.canMoveDown = true;
                 StartCoroutine(TempLock(gp));
             }
             else if (gp.currentDirection == GroupAI.leftOrRight.Right && !gp.isLock)
             {
                 gp.currentDirection = GroupAI.leftOrRight.Left;
+                gp.canMoveDown = true;
                 StartCoroutine(TempLock(gp));
             }
         }

@@ -14,6 +14,7 @@ public class GroupAI : MonoBehaviour
     }
     public float cooldown;
     private bool canMove;
+    public bool canMoveDown;
     void Start()
     {
         canMove = true;
@@ -31,13 +32,19 @@ public class GroupAI : MonoBehaviour
     private void AutoMovement()
     {
         canMove = false;
-        if (currentDirection == leftOrRight.Left)
+        if (currentDirection == leftOrRight.Left && !canMoveDown)
         {
             gameObject.transform.position -= new Vector3(1, 0, 0);
         }
-        else if (currentDirection == leftOrRight.Right)
+        else if (currentDirection == leftOrRight.Right && !canMoveDown)
         {
             gameObject.transform.position += new Vector3(1, 0, 0);
+        }
+        else if ((currentDirection == leftOrRight.Left || 
+            currentDirection == leftOrRight.Right) && 
+            canMoveDown)
+        {
+            MoveDown();
         }
         StartCoroutine(CoolDown());
     }
@@ -45,5 +52,10 @@ public class GroupAI : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldown);
         canMove = true;
+    }
+    public void MoveDown()
+    {
+        GameObject.Find("invaders").gameObject.transform.position += new Vector3(0, 0, -1);
+        canMoveDown = false;
     }
 }
