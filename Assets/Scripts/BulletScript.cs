@@ -21,15 +21,14 @@ public class BulletScript : MonoBehaviour
             obs.Die();
             Destroy(gameObject);
         }
-        if (collider.CompareTag("Invader"))
-        {
-            Destroy(gameObject);
-        }
-
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Boundary"))
+        {
+            Destroy(gameObject);
+        }
+        if (other.CompareTag("Invader"))
         {
             Destroy(gameObject);
         }
