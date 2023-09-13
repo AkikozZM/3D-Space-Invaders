@@ -1,48 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    public Vector3 forceVector;
-    public float rotationSpeed;
-    public float rotation;
+    [Header("Attributes")]
+    public float moveSpeed;
+    public float cooldown;
+
+    [Header("Reference")]
     public GameObject bullet;
     public GameObject aim;
+    
+    private bool canShoot;
+
 
     void Start()
     {
-        forceVector.x = 1.0f;
-        rotationSpeed = 2.0f;
+        canShoot = true;
     }
     private void FixedUpdate()
     {
-        if (Input.GetAxisRaw("Vertical") > 0)
-        {
-            GetComponent<Rigidbody>().AddRelativeForce(forceVector);
-        }
+        // Manipulate ship moves right or left
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            rotation += rotationSpeed;
-            Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
-            GetComponent<Rigidbody>().MoveRotation(rot);
+            this.gameObject.transform.Translate(new Vector3(moveSpeed, 0, 0));
         }
         else if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            rotation -= rotationSpeed;
-            Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
-            GetComponent<Rigidbody>().MoveRotation(rot);
+            this.gameObject.transform.Translate(new Vector3(-moveSpeed, 0, 0));
         }
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && canShoot)
         {
             //Instantiate the bullet
             GameObject obj = Instantiate(bullet, aim.transform.position, Quaternion.identity) as GameObject;
-            BulletScript b = obj.GetComponent<BulletScript>();
-            Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
-            b.heading = rot;
+            canShoot = false;
+            StartCoroutine(fireCooldown());
         }
+    }
+    private IEnumerator fireCooldown()
+    {
+        yield return new WaitForSeconds(cooldown);
+        canShoot = true;
     }
 }

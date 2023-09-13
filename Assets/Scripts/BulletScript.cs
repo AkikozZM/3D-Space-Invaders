@@ -1,32 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public Vector3 thrust;
-    public Quaternion heading;
+    public float attkSpeed;
+
     void Start()
     {
-        thrust.x = 400.0f;
         GetComponent<Rigidbody>().drag = 0;
-        GetComponent<Rigidbody>().MoveRotation(heading);
-        GetComponent<Rigidbody>().AddRelativeForce(thrust);
-        StartCoroutine(selfDie());
+        GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, attkSpeed * 50f));
     }
     private void OnCollisionEnter(Collision collision)
     {
         Collider collider = collision.collider;
-        if (collider.CompareTag("Asteroid"))
+        if (collider.CompareTag("Obstacle"))
         {
-            AsteroidScript roid = collider.gameObject.GetComponent<AsteroidScript>();
-            roid.Die();
+            ObstacleScript obs = collider.GetComponent<ObstacleScript>();
+            obs.Die();
             Destroy(gameObject);
         }
+        if (collider.CompareTag("Invader"))
+        {
+            Destroy(gameObject);
+        }
+
     }
-    private IEnumerator selfDie()
+    private void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
+        if (other.CompareTag("Boundary"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
