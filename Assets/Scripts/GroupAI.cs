@@ -67,7 +67,7 @@ public class GroupAI : MonoBehaviour
     }
     public void MoveDown()
     {
-        GameObject.Find("invaders").gameObject.transform.position += new Vector3(0, 0, -1);
+        GameObject.Find("invaders").gameObject.transform.position += new Vector3(0, -1, 0);
         canMoveDown = false;
     }
     private void AttackPlayer()
@@ -78,7 +78,7 @@ public class GroupAI : MonoBehaviour
                                               0, invaderGreen.transform.position.z);
 
         // Instantiate missile
-        Instantiate(missile, missilePosition, Quaternion.Euler(90f, 0f, 0f));
+        Instantiate(missile, missilePosition, Quaternion.Euler(0f, 0f, 0f));
         StartCoroutine(Attk());
     }
 

@@ -7,6 +7,7 @@ public class Ship : MonoBehaviour
     [Header("Attributes")]
     public float moveSpeed;
     public float cooldown;
+    public bool doubleShoot;
     
 
     [Header("Reference")]
@@ -27,6 +28,7 @@ public class Ship : MonoBehaviour
 
     void Start()
     {
+        doubleShoot = false;
         currentCameraIndex = 0;
         canShoot = true;
         canMove = true;
@@ -49,10 +51,21 @@ public class Ship : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && canShoot)
+        if (Input.GetButtonDown("Fire1") && canShoot && !doubleShoot)
         {
             //Instantiate the bullet
             GameObject obj = Instantiate(bullet, aim.transform.position, Quaternion.identity) as GameObject;
+            canShoot = false;
+            StartCoroutine(fireCooldown());
+        }
+        if (Input.GetButtonDown("Fire1") && canShoot && doubleShoot)
+        {
+            float xPos_L = aim.transform.position.x - 0.15f;
+            float xPos_R = aim.transform.position.x + 0.15f;
+            Vector3 aim1Pos = new Vector3(xPos_L, aim.transform.position.y, aim.transform.position.z);
+            Vector3 aim2Pos = new Vector3(xPos_R, aim.transform.position.y - 0.25f, aim.transform.position.z);
+            GameObject obj = Instantiate(bullet, aim1Pos, Quaternion.identity) as GameObject;
+            GameObject obj2 = Instantiate(bullet, aim2Pos, Quaternion.identity) as GameObject;
             canShoot = false;
             StartCoroutine(fireCooldown());
         }
@@ -126,5 +139,13 @@ public class Ship : MonoBehaviour
         GameObject.Find("bgm").GetComponent<AudioSource>().Stop();
         gameOverObj.SetActive(true);
         restart.SetActive(true);
+        globalObj.levelData.score = 0;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("SelfDestroy"))
+        {
+            GameOver();
+        }
     }
 }

@@ -7,7 +7,7 @@ public class MissileScript : MonoBehaviour
     public float missileSpeed;
     void Start()
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -missileSpeed * 25f));
+        gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, -missileSpeed * 25f, 0));
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -27,6 +27,10 @@ public class MissileScript : MonoBehaviour
             player.GetComponent<Ship>().playerGetHurt();
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
+        }
 
     }
     private void OnTriggerEnter(Collider other)
@@ -35,10 +39,7 @@ public class MissileScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            Destroy(gameObject);
-        }
+
     }
 
 }

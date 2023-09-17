@@ -12,15 +12,17 @@ TagManager:
   - UFO
   - Missile
   - Ground
+  - SelfDestroy
+  - Item
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Boundary
   - Water
   - UI
-  - 
-  - 
+  - Invader
+  - Missile
   - 
   - 
   - 

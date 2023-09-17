@@ -8,7 +8,7 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         GetComponent<Rigidbody>().drag = 0;
-        GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, attkSpeed * 50f));
+        GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, attkSpeed * 50f, 0));
         AudioSource.PlayClipAtPoint(fireSound, gameObject.transform.position);
     }
     private void OnCollisionEnter(Collision collision)

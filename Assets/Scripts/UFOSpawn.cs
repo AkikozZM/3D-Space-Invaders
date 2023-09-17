@@ -22,7 +22,7 @@ public class UFOSpawn : MonoBehaviour
         if (duration <= 0)
         {
             duration = 10;
-            Instantiate(ufo, spawn.transform.position, Quaternion.Euler(90, 0, 0));  
+            Instantiate(ufo, spawn.transform.position, Quaternion.Euler(0, 0, 0));  
         }
     }
 }
