@@ -56,7 +56,7 @@ public class InvaderScript : MonoBehaviour
             ObstacleScript obs = other.gameObject.GetComponent<ObstacleScript>();
             obs.Die();
         }
-        if (other.gameObject.CompareTag("Ground") && !isDied)
+        if (other.gameObject.CompareTag("DangerLine") && !isDied)
         {
             GameObject.Find("Ship").GetComponent<Ship>().GameOver();
         }

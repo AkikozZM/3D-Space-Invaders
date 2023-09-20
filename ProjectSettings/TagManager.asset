@@ -14,6 +14,7 @@ TagManager:
   - Ground
   - SelfDestroy
   - Item
+  - DangerLine
   layers:
   - Default
   - TransparentFX
